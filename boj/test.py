@@ -1,16 +1,21 @@
+from http.client import responses
+import webbrowser
+import json
+from urllib.request import urlopen
 
-for j in range(100):
-    n = j
+print("Let's find it!")
+site = input("Type URL: ")
+era = input("Type date: ")
+url = "http://archive.org/wayback/available?url=%s&timestamp=%s" % (site, era)
+response = urlopen(url)
+contents = response.read()
 
-    dp = [0 for _ in range(n+1)]
-
-    for i in range(2, n+1):
-        dp[i] = dp[i-1] + 1  
-
-        if i%2 == 0 and dp[i] > dp[i//2] + 1 :
-            dp[i] = dp[i//2]+1
-            
-        if i%3 == 0 and dp[i] > dp[i//3] + 1 :
-            dp[i] = dp[i//3] + 1
-            
-    print("N: ", n, "count: ", dp[n])
+text = contents.decode("utf-8")
+data = json.loads(text)
+try:
+    old_site = data["archived_snapshots"]["closest"]["url"]
+    print("Found this copy: ", old_site)
+    print("It should appear in your brower now.")
+    webbrowser.open(old_site)
+except:
+    print("Sorry, no luck finding", site)
