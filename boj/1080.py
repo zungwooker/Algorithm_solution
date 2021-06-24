@@ -18,6 +18,7 @@ for i in range(N): # A와 B가 서로 다르면 1, 같으면 0을 C에 기록
             C[i].append(0)
         
 for i in range(N-2):
+    
     for j in range(M-2):
         if C[i][j]%2==1:
             counts += 1
