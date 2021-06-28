@@ -1,3 +1,3 @@
-a = [[] for _ in range(3)]
-a[0].append(1)
-print(a)
+a = 2
+for _ in range((a/2)):
+    print('k')
