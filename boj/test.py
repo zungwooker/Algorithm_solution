@@ -1,3 +1,3 @@
-a = -5.1
-print(int(a))
-print(a%1)
+a = list(map(int, input().split()))
+a.sort()
+print(a)
