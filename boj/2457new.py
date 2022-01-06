@@ -9,7 +9,7 @@ fls =[]
 
 for _ in range(N):
     f = list(map(int, sys.stdin.readline().split()))
-    if f[2] >= 3 and f[0] != 12:
+    if (f[2] > 3 or (f[2] == 3 and f[3] > 1))  and f[0] != 12:
         fls.append([DateToNumber(f[:2]), DateToNumber(f[2:])])
 
 print(fls)
