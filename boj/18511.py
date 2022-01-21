@@ -1,32 +1,19 @@
-N, K = input().split()
-emts = list(input().split())
-emts.sort(reverse=True)
-res = []
+from itertools import product
 
-for i in range(len(N)):
-    for j in range(int(K)):
-        if emts[j] == N[i]:
-            res.append(emts[j])
-            break
+N, K = map(int, input().split())
+arr = list(map(int, input().split()))
+length = len(str(N))
 
-        if emts[j] < N[i]:
-            res.append(emts[j])
-            for _ in range(len(N)-i-1):
-                res.append(emts[0])
-            break
+while True:
+    temp = list(product(arr, repeat=length))
+    answer = []
 
-        if j == int(K)-1:
-            res.pop()
-            for k in range(1, int(K)):
-                if emts[j] < N[i-1]:
-                    res.append(emts[j])
-                    break
-            for _ in range(len(N)-i):
-                res.append(emts[0])
-            break
+    for i in temp:
+        if int(''.join(i)) <= N:
+            answer.append(int(''.join(i)))
 
-    if len(res) == len(N):
+    if len(answer) >= 1:
+        print(max(answer))
         break
-
-for num in res:
-    print(num, end='')
+    else:
+        length -= 1
